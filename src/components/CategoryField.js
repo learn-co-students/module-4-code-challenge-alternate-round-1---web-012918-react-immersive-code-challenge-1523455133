@@ -2,8 +2,10 @@ import React from 'react'
 
 const CategoryField = (props) => {
   const { category, checked } = props
+  console.log(props.checked);
 
   const onClick = () => {
+
     props.grabCategory(props)
   }
 

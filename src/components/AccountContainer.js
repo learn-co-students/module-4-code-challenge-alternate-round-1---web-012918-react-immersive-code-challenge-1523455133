@@ -6,8 +6,10 @@ import data from '../transactionsData'
 class AccountContainer extends Component {
   state = {
     data: [],
-    category:'all',
-    otherData: []
+    category:'',
+    otherData: [],
+    clicked: false,
+    unTouchedData: []
   }
 
   componentDidMount = () => {
@@ -15,12 +17,14 @@ class AccountContainer extends Component {
     .then(res => res.json())
     .then(json => this.setState({
       data: json,
-      otherData: json
+      otherData: json,
+      unTouchedData: json
     }))
   }
 
   grabCategory = (props) => {
-    console.log(props.category);
+    console.log(props);
+    console.log(props.checked);
     // let newarray;
     //
     // newarray= this.state.data.filter(d => {
@@ -28,13 +32,21 @@ class AccountContainer extends Component {
     // })
     let newArray;
 
-    if(props){
-      newArray = this.state.data.filter(d => {
+
+
+    if(props.category ==='All'){
+      return this.state.unTouchedData
+    }
+    if(props.category){
+      newArray = this.state.otherData.filter(d => {
         console.log(d.category);
         return props.category === d.category
+        // return props.category === true
       })
+    }
 
-    } else {
+
+    else {
       newArray = this.state.otherData
     }
 
@@ -42,7 +54,8 @@ class AccountContainer extends Component {
 
     this.setState({
       category: props.category,
-      data: newArray
+      data: newArray,
+      clicked: !props.category.clicked
 
     })
   }
@@ -54,6 +67,8 @@ class AccountContainer extends Component {
   }
 
   render() {
+
+    console.log(this.state.clicked);
     return (
       <div className="ui grid container">
 
