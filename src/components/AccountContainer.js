@@ -34,20 +34,29 @@ class AccountContainer extends Component {
 
 
 
-    if(props.category ==='All'){
-      return this.state.unTouchedData
-    }
+
     if(props.category){
-      newArray = this.state.otherData.filter(d => {
+       newArray = this.state.otherData.filter(d => {
         console.log(d.category);
-        return props.category === d.category
+        console.log(props.category === d.category);
+
+        // return props.category === d.category
+        if(props.category==='All'){
+          return this.state.otherData;
+        }
+        else if(props.category !=='All'){
+          return props.category === d.category
+        }
         // return props.category === true
       })
     }
 
 
+
+
+
     else {
-      newArray = this.state.otherData
+      newArray = this.state.unTouchedData
     }
 
 
@@ -68,7 +77,8 @@ class AccountContainer extends Component {
 
   render() {
 
-    console.log(this.state.clicked);
+    console.log(this.state.unTouchedData);
+    console.log(this.state.data);
     return (
       <div className="ui grid container">
 
