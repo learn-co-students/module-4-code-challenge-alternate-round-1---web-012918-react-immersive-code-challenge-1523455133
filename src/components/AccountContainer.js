@@ -20,16 +20,34 @@ class AccountContainer extends Component {
   }
 
   grabCategory = (props) => {
+    console.log(props.category);
     // let newarray;
     //
     // newarray= this.state.data.filter(d => {
     //   return d === props.category
     // })
+    let newArray;
+
+    if(props){
+      newArray = this.state.data.filter(d => {
+        console.log(d.category);
+        return props.category === d.category
+      })
+
+    } else {
+      newArray = this.state.otherData
+    }
+
+
+
     this.setState({
-      category: props.category
+      category: props.category,
+      data: newArray
 
     })
   }
+
+
 
   handleChange() {
     //... your code here
