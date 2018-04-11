@@ -1,12 +1,34 @@
 import React, { Component } from 'react'
 import TransactionsList from './TransactionsList'
 import CategorySelector from './CategorySelector'
-import {transactions} from '../transactionsData'
+import data from '../transactionsData'
 
 class AccountContainer extends Component {
-  constructor() {
-    super()
-    //... your code here
+  state = {
+    data: [],
+    category:'all',
+    otherData: []
+  }
+
+  componentDidMount = () => {
+    fetch(`https://boiling-brook-94902.herokuapp.com/transactions`)
+    .then(res => res.json())
+    .then(json => this.setState({
+      data: json,
+      otherData: json
+    }))
+  }
+
+  grabCategory = (props) => {
+    // let newarray;
+    //
+    // newarray= this.state.data.filter(d => {
+    //   return d === props.category
+    // })
+    this.setState({
+      category: props.category
+
+    })
   }
 
   handleChange() {
@@ -14,13 +36,12 @@ class AccountContainer extends Component {
   }
 
   render() {
-    console.log(transactions)
     return (
       <div className="ui grid container">
 
-        <CategorySelector />
+        <CategorySelector grabCategory={this.grabCategory} />
 
-        <TransactionsList />
+        <TransactionsList clickedValue={this.state.category} items={this.state.data}/>
 
       </div>
     )
