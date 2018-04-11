@@ -3,6 +3,8 @@ import CategoryField from './CategoryField'
 import categories from '../categories'
 
 const CategorySelector = (props) => {
+  console.log(props.checked);
+
 
   const categoryFields = categories.map(
     (category, i) => {
