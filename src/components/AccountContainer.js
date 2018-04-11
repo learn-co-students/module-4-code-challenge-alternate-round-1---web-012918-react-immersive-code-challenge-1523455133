@@ -23,7 +23,6 @@ class AccountContainer extends Component {
   }
 
   grabCategory = (props) => {
-    console.log(props);
     console.log(props.checked);
     // let newarray;
     //
@@ -37,8 +36,7 @@ class AccountContainer extends Component {
 
     if(props.category){
        newArray = this.state.otherData.filter(d => {
-        console.log(d.category);
-        console.log(props.category === d.category);
+      
 
         // return props.category === d.category
         if(props.category==='All'){
